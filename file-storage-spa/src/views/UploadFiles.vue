@@ -70,11 +70,11 @@
             </div>
           </div>
 
-          <button
-            v-if="file.uploaded"
-            class="btn btn-success btn-small"
-            @click="download(file.id)"
-          >
+            <button
+              v-if="file.uploaded"
+              class="btn btn-success btn-small"
+              @click="downloadFile(file.id, file.name)"
+            >
             ⬇️ Скачать
           </button>
         </div>
@@ -94,6 +94,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AppHeader from '@/components/AppHeader.vue'
 import { api } from '@/api/http'
+import { downloadFile } from '@/api/files'
+
 
 const router = useRouter()
 
@@ -140,10 +142,7 @@ const onDrop = (e) => {
 }
 
 const download = (id) => {
-  window.open(
-    `https://chemp2026.hafn.ru/files/${id}/download`,
-    '_blank'
-  )
+
 }
 
 const back = () => {

@@ -42,7 +42,7 @@
           <div class="file-actions">
             <button
               class="btn btn-success btn-small"
-              @click="download(file.id)"
+              @click="download(file)"
             >
               ⬇️ Скачать
             </button>
@@ -64,6 +64,8 @@
 import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/AppHeader.vue'
 import { api } from '@/api/http'
+import { downloadFile } from '@/api/files'
+
 
 const files = ref([])
 const loading = ref(false)
@@ -83,12 +85,10 @@ const loadShared = async () => {
   }
 }
 
-const download = (id) => {
-  window.open(
-    `https://chemp2026.hafn.ru/files/${id}/download`,
-    '_blank'
-  )
+const download = (file) => {
+  downloadFile(file.id, file.name)
 }
+
 
 const formatDate = (date) =>
   new Date(date).toLocaleDateString()
